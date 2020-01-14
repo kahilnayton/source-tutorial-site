@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `This is where i write stuff `,
-    author: `@gatsbyjs`,
+    title: `Using external API's`,
+    description: `Bring in pictures from Pixabay and filtering through them `,
+    author: `Kahil`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -31,9 +31,28 @@ module.exports = {
     resolve: "pixabay-api",
       options: {
         key: "14903148-cb3d617e2c3ce488c88c79d7d",
-        q: "yellow flowers",
+        q: "blue flowers",
       },
     },
+    { // lunr search plugin
+      resolve: 'gatsby-plugin-lunr',
+      options: {
+        languages: [{name: 'en'}],
+        fields: [
+          { name: 'tags', store: true, attributes: { boost: 20 } }, // This allos you to boost the search prioritisation
+          { name: 'user', store: true, attributes: { boost: 5 } }, // This would be 5 times more relavant
+          { name: 'largeImageURL', store: true, attributes: { boost: 5 } }, // This would be 5 times more relavant
+        ],
+        resolvers: {
+          PixabayPhoto: {
+            tags: node => node.tags, 
+            user: node => node.user,
+            largeImageURL: node => node.largeImageURL,
+          },
+        },
+        filename: 'search_index_json',
+      },
+    }
     // {
     //   resolve: "medication-finder-api",
     //   options: {

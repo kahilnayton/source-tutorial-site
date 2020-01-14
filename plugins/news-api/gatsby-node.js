@@ -9,7 +9,7 @@ exports.sourceNodes = async (
   const resp = await fetch(apiUrl);
   const data = await resp.json();
 
-  console.log(resp)
+  // console.log(resp)
 
   // data.hits.forEach(news => {
   //   createNode({

@@ -9,20 +9,24 @@ class IndexPage extends React.Component {
     const siteTitle = data.site.siteMetadata.title
     const siteDescription = data.site.siteMetadata.description
     const photos = data.allPixabayPhoto.largeImageURL
+
+    // debugger;
       
     return (
       <div>
-        <h1>Author</h1>
-        <h1>title</h1>
-        {/* <ul>
-          {data.allNewsArticle.node.map(article => (
-            <li key={article.node.id}>
-              <h2>{article.node.title}</h2>
-              <p>{article.node.author}</p>
-              <img src={article.urlToImage} alt="Image url"/>
-            </li>
+        <h1>{siteTitle}</h1>
+        <p>{siteDescription}</p>
+
+          {data.allPixabayPhoto.edges.map(({ node }, index) => (
+            <div key={index}>
+              <img src={node.largeImageURL} alt="Image url"/>
+              <p>Likes - {node.likes}</p>
+              <p>Type - {node.type}</p>
+              <p>Views - {node.views}</p>
+              <p>Tags - {node.tags}</p>
+              <p>User - {node.user}</p>
+            </div>
           ))}
-        </ul> */}
       </div>
     )
   }
@@ -34,7 +38,15 @@ export const pageQuery = graphql`
     edges {
       node {
         id
+        user
+        imageSize
         largeImageURL
+        likes
+        previewURL
+        tags
+        user_id
+        type
+        views
       }
     }
   }
