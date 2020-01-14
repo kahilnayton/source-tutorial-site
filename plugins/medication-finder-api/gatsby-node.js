@@ -5,7 +5,7 @@ exports.sourceNodes = async (
     { boundActionCreators: { createNode }, createNodeId, createContentDigest },
     { plugins, ...options }
   ) => {
-    const apiUrl = `https://cors-anywhere.herokuapp.com/medi-api.herokuapp.com/api/v1/drugs?${queryString.stringify(options)}`;
+    const apiUrl = `https://cors-anywhere.herokuapp.com/medi-api.herokuapp.com/api/v1/drugs/`;
     const response = await fetch(apiUrl);
     const data = await response.json();
   
