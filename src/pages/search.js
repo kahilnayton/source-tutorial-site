@@ -18,7 +18,6 @@ const Search = ({
                 const refs = lunr.en.index.search(searchQuery);
                 const images = refs.map(({ ref }) => lunr.en.store[ref]);
                 setResults(images)
-                console.log(results)
             });
         }
     }, [location.search]); // An empty array tells the component to only render once and not again

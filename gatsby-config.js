@@ -52,14 +52,14 @@ module.exports = {
         },
         filename: 'search_index_json',
       },
-    }
-    // {
-    //   resolve: "medication-finder-api",
-    //   options: {
-    //     key: "",
-    //     q: "",
-    //   },
-    // },
+    },
+    {
+      resolve: "medication-finder-api",
+      options: {
+        key: "",
+        q: "",
+      },
+    },
     // {
     //   resolve: "news-api",
     //   options: {
