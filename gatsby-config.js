@@ -28,26 +28,26 @@ module.exports = {
       },
     },
     {
-    resolve: "gatsby-source-pixabay",
+    resolve: "pixabay-api",
       options: {
         key: "14903148-cb3d617e2c3ce488c88c79d7d",
         q: "yellow flowers",
       },
     },
-    {
-      resolve: "medication-finder-api",
-      options: {
-        key: "",
-        q: "",
-      },
-    },
-    {
-      resolve: "news-api",
-      options: {
-        key: "8ff8c1536f0645d68c258fc65e3a77b8",
-        q: "",
-      },
-    },
+    // {
+    //   resolve: "medication-finder-api",
+    //   options: {
+    //     key: "",
+    //     q: "",
+    //   },
+    // },
+    // {
+    //   resolve: "news-api",
+    //   options: {
+    //     key: "8ff8c1536f0645d68c258fc65e3a77b8",
+    //     q: "bitcoin",
+    //   },
+    // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
