@@ -1,42 +1,74 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import React from "react";
+import CustomForm from "./customForm";
+import { Link } from "gatsby";
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+export default class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mobileNav: false,
+      isSticky: false,
+      showHeader: true
+    };
+  }
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+  componentDidMount() {
+    this.prev = window.scrollY;
+    window.addEventListener("scroll", e => this.handleNavigation(e));
+    window.addEventListener("scroll", this.onScroll.bind(this));
+  }
+
+  handleNavigation = e => {
+    const window = e.currentTarget;
+
+    if (this.prev > window.scrollY) {
+      this.setState({
+        showHeader: true
+      });
+    } else if (this.prev < window.scrollY && window.pageYOffset > 180) {
+      this.setState({
+        showHeader: false
+      });
+    }
+    this.prev = window.scrollY;
+  };
+
+  onScroll = () => {
+    let offset = 150;
+
+    if (!this.state.isSticky && window.pageYOffset >= offset) {
+      this.setState({
+        isSticky: true
+      });
+    } else if (this.state.isSticky && window.pageYOffset < offset) {
+      this.setState({
+        isSticky: false
+      });
+    }
+  };
+
+  toggleNav = () => {
+    this.setState({
+      mobileNav: !this.state.mobileNav
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/search">Search</Link>
+          </li>
+        </ul>
+        <CustomForm />
+      </div>
+    );
+  }
 }
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header

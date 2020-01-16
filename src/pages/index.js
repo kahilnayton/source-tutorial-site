@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-
+import Layout from '../components/layout';
 
 
 class IndexPage extends React.Component {
@@ -13,7 +13,7 @@ class IndexPage extends React.Component {
     // debugger;
       
     return (
-      <div>
+      <Layout>
         <h1>{siteTitle}</h1>
         <p>{siteDescription}</p>
 
@@ -27,7 +27,7 @@ class IndexPage extends React.Component {
               <p>User - {node.user}</p>
             </div>
           ))}
-      </div>
+      </Layout>
     )
   }
 }
