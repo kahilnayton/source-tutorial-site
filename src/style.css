@@ -1,17 +1,47 @@
 .search-results-count {
-    margin-bottom: 0;
-    margin-top: 0;
-    font-size: 14px;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 14px;
+}
+
+.search-results-list {
+  list-style: none;
+}
+
+.search-results-list__heading {
+  margin-bottom: 5px;
+}
+
+.search-results-list__link {
+  box-shadow: none;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+@keyframes appear {
+  0% {
+    opacity: 0;
   }
-  
-  .search-results-list {
-    list-style: none;
+  100% {
+    opacity: 1;
   }
-  
-  .search-results-list__heading {
-    margin-bottom: 5px;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-2%);
   }
-  
-  .search-results-list__link {
-    box-shadow: none;
+  100% {
+    transform: translateX(0);
   }
+}
+
+@keyframes shrink {
+  0% {
+    width: 95%;
+  }
+  100% {
+    width: 90%;
+  }
+}

@@ -1,74 +1,77 @@
 import React from "react";
 import CustomForm from "./customForm";
 import { Link } from "gatsby";
+import Menu from './menu';
+import MenuButton from './menuButton';
+import MenuItem from './menuItem';
 
-export default class Header extends React.Component {
-  constructor(props) {
+class Header extends React.Component {
+  constructor(props){
     super(props);
-    this.state = {
-      mobileNav: false,
-      isSticky: false,
-      showHeader: true
-    };
-  }
-
-  componentDidMount() {
-    this.prev = window.scrollY;
-    window.addEventListener("scroll", e => this.handleNavigation(e));
-    window.addEventListener("scroll", this.onScroll.bind(this));
-  }
-
-  handleNavigation = e => {
-    const window = e.currentTarget;
-
-    if (this.prev > window.scrollY) {
-      this.setState({
-        showHeader: true
-      });
-    } else if (this.prev < window.scrollY && window.pageYOffset > 180) {
-      this.setState({
-        showHeader: false
-      });
+    this.state={
+      menuOpen:false,
     }
-    this.prev = window.scrollY;
-  };
-
-  onScroll = () => {
-    let offset = 150;
-
-    if (!this.state.isSticky && window.pageYOffset >= offset) {
-      this.setState({
-        isSticky: true
-      });
-    } else if (this.state.isSticky && window.pageYOffset < offset) {
-      this.setState({
-        isSticky: false
-      });
+  }
+  
+  handleMenuClick() {
+    this.setState({menuOpen:!this.state.menuOpen});
+  }
+  
+  handleLinkClick() {
+    this.setState({menuOpen: false});
+  }
+  
+  render(){
+    const styles= 
+      {
+        container:{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: '99',
+          opacity: 0.9,
+          display:'flex',
+          alignItems:'center',
+          background: 'black',
+          width: '100%',
+          color: 'white',
+          fontFamily:'Lobster',
+        },
+        logo: {
+          margin: '0 auto',
+        },
+        body: {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100vw',
+          height: '100vh',
+          filter: this.state.menuOpen ? 'blur(2px)':null,
+          transition: 'filter 0.5s ease',
+        },
     }
-  };
-
-  toggleNav = () => {
-    this.setState({
-      mobileNav: !this.state.mobileNav
+    
+    const menu = ['About Us','Our Products','Services','FAQ','Contact Us']
+    const menuItems = menu.map((val,index)=>{
+      return (
+        <MenuItem 
+          key={index} 
+          delay={`${index * 0.1}s`}
+          onClick={()=>{this.handleLinkClick();}}>{val}</MenuItem>)
     });
-  };
-
-  render() {
-    return (
+    
+    return(
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/search">Search</Link>
-          </li>
-        </ul>
-        <CustomForm />
+        <div style={styles.container}>
+          <MenuButton open={this.state.menuOpen} onClick={()=>this.handleMenuClick()} color='white'/>
+          <div style={styles.logo}>Logo</div>
+        </div>
+        <Menu open={this.state.menuOpen}>
+          {menuItems}
+        </Menu>
       </div>
-    );
+    )
   }
 }
+
+export default Header;
